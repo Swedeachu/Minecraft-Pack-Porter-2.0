@@ -1,10 +1,11 @@
 # This project and my other past tools are now combined into an improved single desktop application here: [Swim Pack Tool](https://github.com/Swim-Services/Swim-Pack-Tool)
 # Swim Pack Porter 2.0
 Ports Minecraft Texture Packs Across Bedrock and Java Edition <br />
-Lead Programmer: Swimfan72 <br />
+Lead Programmer: Swedeachu <br />
 Assets Developer: PolrFlare <br />
 Senior Developer: The 7th Sun <br />
 Container UI Code Forked from Crisxolt <br />
+Thanks to the various YouTubers that showcased our tool
 
 # Update Log
  Bedrock Edition MCPACKs can now be converted to Minecraft Java Edition Texture Packs <br />
