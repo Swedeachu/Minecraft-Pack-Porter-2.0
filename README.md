@@ -1,5 +1,5 @@
-# This project and my other past tools are now combined into an improved single desktop application here: [Swim Pack Tool](https://github.com/Swim-Services/Swim-Pack-Tool)
-# Swim Pack Porter 2.0
+# This project and my other past tools are now combined into an improved single desktop application here: [Bedrock Pack Tool](https://github.com/Swim-Services/Swim-Pack-Tool)
+# Minecraft Pack Porter 2.0
 Ports Minecraft Texture Packs Across Bedrock and Java Edition <br />
 Lead Programmer: Swedeachu <br />
 Assets Developer: PolrFlare <br />
