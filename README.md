@@ -14,6 +14,7 @@ Thanks to the various YouTubers that showcased our tool over the years
  Over 60 different issues and bugs fixed <br />
  Performance and Code Quality Greatly Improved <br />
  Sound porting Added <br />
+ Batch porting: drop or select a folder of packs (Java pack folders, .zip and .mcpack) and every pack inside is ported in one go, into a new "<folder name> PORTED" folder in your save location <br />
 
 # Important Note
 Texture packs that contain errors will carry over those errors to the pack when ported. The best I could do is try to automatically fix them but I can only do so much to prevent these potential errors from happening. Regardless this software will save hours of manual work even if a minute or two is required to make a slight patch if a ported pack does contain errors.

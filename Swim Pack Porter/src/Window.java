@@ -35,6 +35,8 @@ public class Window {
 	public static String workerPackPath;
 	public static boolean busy = false;
 	public static List<String> configs = new ArrayList<>();
+	public static String batchSavePath = null; // only set while a pack folder is being batch ported, overrides the save location
+	public static String batchStatus = ""; // "Pack 2 of 5: name" header shown above the current task during a batch
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException, IOException {
 		String path = new File(".").getCanonicalPath();
@@ -119,7 +121,7 @@ public class Window {
 		portButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		portButton.setBounds(225, 335, 450, 110);
 		frame.getContentPane().add(portButton);
-		updateConsoleText("Swim Services Minecraft Texture Pack Porter v2.0\n Now Supports MCPACK to Java Conversion and File Upload Drag and Drop", true);
+		updateConsoleText("Swim Services Minecraft Texture Pack Porter v2.0\n Now Supports MCPACK to Java Conversion and File Upload Drag and Drop\n Drop (or select) a folder of packs to port all of them in one go", true);
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(48, 23, 800, 295);
@@ -271,6 +273,10 @@ public class Window {
 			System.out.println(directCheck + " found");
 		}
 		File file = new File(uploadedFile); // this is the pack which we will port
+		if (BatchPort.isBatchFolder(file)) { // a folder full of packs instead of a single pack
+			processBatchPort(file);
+			return;
+		}
 		workerPackPath = uploadedFile;
 		try {
 			String extension = FilenameUtils.getExtension(file.getAbsolutePath()).toLowerCase();
@@ -336,6 +342,19 @@ public class Window {
 			textArea.setText(" Unknown File Processing Error");
 			e1.printStackTrace();
 		}
+	}
+
+	public static void processBatchPort(File folder) {
+		List<File> packs = BatchPort.findPacks(folder);
+		System.out.println("batch porting " + packs.size() + " packs from: " + folder.getAbsolutePath());
+		busy = true;
+		BatchPort task = new BatchPort(folder, packs);
+		task.execute();
+	}
+
+	// where ported packs get written, the batch output folder while a batch is running, otherwise the configured save location
+	public static String currentPackSavePath() {
+		return batchSavePath != null ? batchSavePath : configs.get(1);
 	}
 
 	public static void processSkyPort(String uploadedFile) {
@@ -404,7 +423,8 @@ public class Window {
 	public static void progressConsoleUpdate(String text) {
 		textArea.setSelectedTextColor(Color.WHITE);
 		textArea.setForeground(Color.WHITE);
-		textArea.setText(" Current Task: " + text);
+		String header = batchStatus.isEmpty() ? "" : " " + batchStatus + "\n";
+		textArea.setText(header + " Current Task: " + text);
 	}
 
 	public static BufferedImage loadImage(String str) throws IOException {

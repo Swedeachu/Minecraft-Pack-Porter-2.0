@@ -35,7 +35,7 @@ public class JavaPort extends SwingWorker<Void, String> {
 		File packTempLocation = new File(System.getenv("APPDATA") + "\\Swim Services\\" + file.getName());
 		FileUtils.copyFile(file, packTempLocation);
 		unzipMCPACK(packTempLocation); // unzip the mcpack
-		String packPath = Window.configs.get(1) + "\\";
+		String packPath = Window.currentPackSavePath() + "\\";
 		String packName = FilenameUtils.removeExtension(file.getName());
 		String path = packPath + packName;
 		new File(path).mkdirs(); // folder of pack

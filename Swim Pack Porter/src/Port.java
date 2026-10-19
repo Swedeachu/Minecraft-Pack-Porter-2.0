@@ -46,7 +46,7 @@ public class Port extends SwingWorker<Void, String> {
 	}
 
 	public static void port(File file) throws IOException {
-		String packPath = Window.configs.get(1) + "\\";
+		String packPath = Window.currentPackSavePath() + "\\";
 		String filePath = file.getAbsolutePath();
 		failed = false;
 
